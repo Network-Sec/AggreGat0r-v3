@@ -19,6 +19,8 @@ FOSS release of Chuck's favourite LONG RANGE scanner
 
 Chuck prefers on LONG RANGES to first make screenshots: They're unobtrusive and result in a good pre-sorting of > 64k targets. 
 
+Chuck makes no mistakes. 
+
 Once he got all screenshots: 
 - Chuck uses the result extraction script (we will automate this further in an upcoming version)
 - Chuck moves the screenshot image files TO THE ROOT of the screenshots folder
