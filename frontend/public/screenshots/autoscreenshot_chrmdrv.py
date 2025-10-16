@@ -29,7 +29,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # -------------------------------------------------------------
 # Configuration
 # -------------------------------------------------------------
-BASE_DIR_WINDOWS = "D:/Websites/automatic/"
+BASE_DIR_WINDOWS = "./"
 CHROMEDRIVER_PATH = os.path.join(BASE_DIR_WINDOWS, "chromedriver.exe")
 SCREENSHOT_DIR = ""
 IP_PORTS = [80, 443, 4433, 4443, 8080, 8081, 8181, 8282, 8443, 5601, 5900, 9200]
@@ -287,4 +287,5 @@ def main(argv: list[str]) -> None:
             driver.quit()
 
 if __name__ == "__main__":
+
     main(sys.argv[1:])
