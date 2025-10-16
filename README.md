@@ -4,6 +4,7 @@ FOSS release of Chuck's favourite LONG RANGE scanner
 ## You got 2 choices... maybe more, maybe not!
 - Chuck uses this tool with mongoDB
 - Chuck can install all deps by himself without help from others, or AI
+- Chuck knows, .env files are the true DANGER, but knows how to handle them ALL
 - Chuck makes automated reverse DNS lookup list, that must look like this:
 
 ```bash
