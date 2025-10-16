@@ -5,7 +5,7 @@ FOSS release of Chuck's favourite LONG RANGE scanner
 - Chuck uses this tool with mongoDB
 - Chuck can install all deps by himself without help from others, or AI
 - Chuck knows, .env files are the true DANGER, but knows how to handle them ALL
-- Chuck makes automated reverse DNS lookup list, that must look like this:
+- Chuck makes an automated reverse DNS lookup list, that must look like this:
 
 ```bash
 192.168.23.23: sub.domain.example
