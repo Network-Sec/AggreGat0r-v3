@@ -5,7 +5,7 @@ ALIENVAULT_OTX_API_KEY =
 
 # DB
 MONGO_CONNECTION_URI = 'mongodb://'
-MONGO_DB_NAME = ''
+MONGO_DB_NAME = 'blackscan4'
 
 # To avoid scanning cloudflare
 CLOUDFLARE_IPV4_URL = "https://www.cloudflare.com/ips-v4"
