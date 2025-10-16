@@ -7,8 +7,8 @@ DNS_RESOLVER="9.9.9.9"
 # --- Usage Check ---
 if [ "$#" -eq 0 ] || ([ "$1" == "-l" ] && [ -z "$2" ]); then
     echo "Usage:"
-    echo "  Single Target: ./pd_scan.sh <ipv4> <domain.tld>"
-    echo "  List From File: ./pd_scan.sh -l <input_file>"
+    echo "  Single Target: ./pd_scans.sh <ipv4> <domain.tld>"
+    echo "  List From File: ./pd_scans.sh -l <input_file>"
     exit 1
 fi
 
