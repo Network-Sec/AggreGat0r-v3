@@ -1,0 +1,3 @@
+MONGO_CONNECTION_URI = 'mongodb://'
+MONGO_DB_NAME = 'blackscan4'
+MONGO_DB_COLLECTION = 'records'
