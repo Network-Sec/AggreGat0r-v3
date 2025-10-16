@@ -1,0 +1,21 @@
+# API keys
+VT_API_KEY = 
+ABUSEIPDB_API_KEY = 
+ALIENVAULT_OTX_API_KEY = 
+
+# DB
+MONGO_CONNECTION_URI = 'mongodb://'
+MONGO_DB_NAME = ''
+
+# To avoid scanning cloudflare
+CLOUDFLARE_IPV4_URL = "https://www.cloudflare.com/ips-v4"
+CLOUDFLARE_IPV6_URL = "https://www.cloudflare.com/ips-v6"
+
+# APIs for IP check
+VT_API_URL   = 'https://www.virustotal.com/api/v3/ip_addresses/'
+ABUSE_IP_URL = 'https://api.abuseipdb.com/api/v2/check'
+
+# Generic Pulse / Ingestion stream
+OTX_API_URL  = 'https://otx.alienvault.com/api/v1/pulses/subscribed'
+PHIS_API_URL = 'https://data.phishtank.com/data/{apiKeyPlaceholder}/online-active.json'
+URLABUSE_URL = 'https://urlhaus.abuse.ch/downloads/json_recent/'

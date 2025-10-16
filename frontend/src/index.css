@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+#toolcard-nmap {
+  background-color: #00cfb2;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  httpx  (coral)  ------------------------------ */
+#toolcard-httpx {
+  background-color: #ff61ca;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  nmap  (your existing teal)  ------------------- */
+#toolcard-nmap {
+  background-color: #00cfb2;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  urlfinder  (sun‑yellow)  ---------------------- */
+#toolcard-urlfinder {
+  background-color: #8b3fdd;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  smap  (electric blue)  ----------------------- */
+#toolcard-smap {
+  background-color: #6164ff;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  fingerprintx  (deep purple)  ----------------- */
+#toolcard-fingerprintx {
+  background-color: #00a6ff;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  subfinder  (emerald green)  ------------------- */
+#toolcard-subfinder {
+  background-color: #2ecc71;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  tlsx  (tangerine orange)  --------------------- */
+#toolcard-TLSX {
+  background-color: #ffd026;
+  color: #fff;
+  font-size: 22px;
+}
+
+/* ----------  virustotal  (brick red)  --------------------- */
+#toolcard-virustotal {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 22px;
+}
+
+div#toolcard-virustotal > svg {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 22px;
+}
+
+/* ----------  abuseipdb  (sky blue)  ----------------------- */
+#toolcard-abuseipdb {
+  background-color: #121212;
+  color: #fff;
+  font-size: 22px;
+}
