@@ -29,8 +29,13 @@ Once he got all screenshots:
 
 Chuck is now confident and ready to run both frontend and backend. 
 
+# Changes
+Please note that everything presented is subject to change, that includes the data ingestion. Meaning at any new version, old data may no longer work. We recommend to keep the automatically created folders from autoscreenshot and pd_scans, so you can easily re-ingest, when we change some formats. 
+
 # AggreGat0r v3 Demo
 We already implemented vast improvements, search / filter, pagination, sorting, better HTTPX results with header and body, lots of layout fixes, VirusTotal and AbuesIPDB fix, ... 
+
+Following demo screenshots were partly combined from several sources in an artistic manner, to demonstrate the capabilities of the platform. They still show the software very accurately, all features you see are present (as are a few bugs like the totalPorts in the list / tool section). We keep iterating as much as we can, it already has become an invaluable tool in our collection for larger tasks and long-term storage. As usual in offensive tools, this is not a one-click scans-ready platform, the actual ingestion happens on terminal level, as most of us are used to and love to, cause it's fastest and easiest. We just tried to provide tools to automate-away repetitive tasks. 
 
 ![](demo/aggregator_v3_00.jpg)
 ![](demo/aggregator_v3_04.JPG)
