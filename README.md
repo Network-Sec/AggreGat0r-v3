@@ -30,5 +30,11 @@ Once he got all screenshots:
 Chuck is now confident and ready to run both frontend and backend. 
 
 # AggreGat0r v3 Demo
-We already implemented vast improvements, search / filter, pagination, sorting, better HTTPX results with header and body, lots of layout fixes, VirusTotal and AbuesIPDB fix, ... new screenshots to be uploaded.
+We already implemented vast improvements, search / filter, pagination, sorting, better HTTPX results with header and body, lots of layout fixes, VirusTotal and AbuesIPDB fix, ... 
+
+![](demo/aggregator_v3_00.JPG)
+![](demo/aggregator_v3_01.JPG)
+![](demo/aggregator_v3_03.JPG)
+![](demo/aggregator_v3_04.JPG)
+
 
