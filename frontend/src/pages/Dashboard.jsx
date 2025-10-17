@@ -70,7 +70,12 @@ function Dashboard() {
 
                 {/* --- The final full-width cards, in order, at the bottom --- */}
                 {record.smap && <ToolCard toolName="smap" toolData={record.smap} />}
-                
+
+                {/* --- Extra SMAP Vulns, if they exist --- */}
+                {record.smap?.flat(2).some(r => Array.isArray(r.vulns) && r.vulns.length) && (
+                   <ToolCard toolName="vulns" toolData={record.smap} />
+                )}
+
                 {/* Use the exact key from the database if known, or check case-insensitively if needed */}
                 {/* For simplicity and robustness, we check for both common cases here. */}
                 {(record.abuseipdb || record.AbuseIPDB) && (

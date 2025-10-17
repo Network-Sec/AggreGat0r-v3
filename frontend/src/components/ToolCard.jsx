@@ -9,6 +9,7 @@ import SubfinderDisplay from './SubfinderDisplay';
 import TlsxDisplay from './TlsxDisplay';
 import VirusTotalDisplay from './VirusTotalDisplay';
 import AbuseIpdbDisplay from './AbuseIpdbDisplay';
+import VulnsDisplay from './VulnsDisplay';   // ← NEW
 
 /* --- ICONS --- */
 import {
@@ -21,7 +22,8 @@ import {
   FiCpu,
   FiServer,
   FiTag,
-  FiChevronDown, // Add Chevron for the toggle indicator
+  FiChevronDown,
+  FiAlertCircle,   // <-- new icon
 } from 'react-icons/fi';
 
 const toolDisplayMap = {
@@ -34,6 +36,7 @@ const toolDisplayMap = {
   tlsx: TlsxDisplay,
   virustotal: VirusTotalDisplay,
   abuseipdb: AbuseIpdbDisplay,
+  vulns: VulnsDisplay,                // ← NEW
 };
 
 const toolIcons = {
@@ -46,7 +49,9 @@ const toolIcons = {
   tlsx: FiCpu,
   virustotal: FiShield,
   abuseipdb: FiServer,
+  vulns: FiAlertCircle,                    // ← NEW (any icon you like)
 };
+
 
 const ToolCard = ({ toolName, toolData }) => {
   // 1. Add state to manage visibility, defaulting to true (expanded)

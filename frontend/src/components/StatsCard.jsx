@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 /* ── 1️⃣  Register Chart.js core components ── */
 import {
   Chart as ChartJS,
@@ -27,41 +28,102 @@ const PIE_COLORS = ['#38BDF8', '#5117ffff'];   // cyan (open) / violet (closed)
 const BAR_COLOR   = '#ffe224ff';               // emerald
 const BAR_HOVER   = '#84C54E';
 
+// Helper function for recursive key counting (unchanged from earlier versions)
+const countKeysAndNonEmptyValues = (obj) => {
+  let keyCount = 0;
+  let nonEmptyValueCount = 0;
+
+  if (typeof obj !== 'object' || obj === null) {
+    return { keyCount: 0, nonEmptyValueCount: (obj !== null && obj !== undefined && obj !== '') ? 1 : 0 };
+  }
+
+  if (Array.isArray(obj)) {
+    obj.forEach(item => {
+      const { keyCount: subKeyCount, nonEmptyValueCount: subNonEmptyValueCount } = countKeysAndNonEmptyValues(item);
+      keyCount += subKeyCount;
+      nonEmptyValueCount += subNonEmptyValueCount;
+    });
+  } else {
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        keyCount++;
+        const value = obj[key];
+        const { keyCount: subKeyCount, nonEmptyValueCount: subNonEmptyValueCount } = countKeysAndNonEmptyValues(value);
+        keyCount += subKeyCount;
+        nonEmptyValueCount += subNonEmptyValueCount;
+
+        if (typeof value !== 'object' || value === null) {
+          if (value !== null && value !== undefined && value !== '') {
+            nonEmptyValueCount++;
+          }
+        }
+      }
+    }
+  }
+  return { keyCount, nonEmptyValueCount };
+};
+
 /* ── 4️⃣  StatsCard component (plain JS) ── */
 const StatsCard = ({ record }) => {
-  /* ----- 4.1  Open/Closed ports (pie) ----- */
+
+  const scanCoveragePercentage = React.useMemo(() => {
+    if (!record) return 0;
+    const { keyCount, nonEmptyValueCount } = countKeysAndNonEmptyValues(record);
+    const approximateMaxKeys = 500; // Adjust this value based on your data's complexity
+    if (approximateMaxKeys === 0 || keyCount === 0) return 0;
+    const rawPercentage = (nonEmptyValueCount / approximateMaxKeys) * 100;
+    return Math.min(100, Math.round(rawPercentage));
+  }, [record]);
+
+
   const portData = React.useMemo(() => {
     const counts = { open: 0, closed: 0 };
     const nmapRun = record.nmap?.[0];
     if (!nmapRun?.host?.ports?.port) return [];
-
     const ports = Array.isArray(nmapRun.host.ports.port)
       ? nmapRun.host.ports.port
       : [nmapRun.host.ports.port];
-
     ports.forEach(p => {
       const state = p.state?.['@state'];
       if (state === 'open') counts.open++;
       if (state === 'closed') counts.closed++;
     });
-
     return [
       { name: 'Open', value: counts.open },
       { name: 'Closed', value: counts.closed },
     ];
   }, [record]);
 
-  /* ----- 4.2  HTTP status codes (bar) ----- */
+  // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+  // CORRECTED: This logic now traverses the nested httpx data structure
+  // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
   const statusData = React.useMemo(() => {
     const counts = {};
-    record.httpx?.forEach(i => {
-      const code = i.status_code ?? 'unknown';
-      counts[code] = (counts[code] ?? 0) + 1;
-    });
+    if (Array.isArray(record.httpx)) {
+      // httpx is an array of ASNs
+      record.httpx.forEach(asn => {
+        if (Array.isArray(asn.hosts)) {
+          // Each ASN has hosts
+          asn.hosts.forEach(host => {
+            if (Array.isArray(host.ports)) {
+              // Each host has ports
+              host.ports.forEach(port => {
+                if (Array.isArray(port.responses)) {
+                  // Each port has an array of responses
+                  port.responses.forEach(response => {
+                    const code = response.status_code ?? 'unknown';
+                    counts[code] = (counts[code] ?? 0) + 1;
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [record]);
 
-  /* ── 4.3  Chart options (common theme) ── */
   const doughnutOpts = {
     responsive: true,
     maintainAspectRatio: false,
@@ -96,7 +158,6 @@ const StatsCard = ({ record }) => {
     },
   };
 
-  /* ── 4.4  Render (no TS, no max‑height) ── */
   return (
     <div className="bg-[#162327] text-white p-6 shadow-xl border border-gray-500  w-full">
       {/* ── Header (domain / IP) ── */}
@@ -114,32 +175,38 @@ const StatsCard = ({ record }) => {
 
       {/* ── Charts (two columns) ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 border-box">
-        {/* 4.4.1  Open / Closed ports */}
-        <div className="h-[240px]">
-          <h3 className="text-lg font-medium text-indigo-300 mb-3 text-center">
-            Port Status
+        {/* Scan Coverage Percentage */}
+        <div className="h-[240px] flex flex-col justify-center items-center">
+          <h3 id="scan-cov-title" className="text-xl font-medium text-indigo-300 mb-3 text-center">
+            Scan Coverage
           </h3>
-          {portData.length ? (
-            <Doughnut
-              data={{
-                labels: portData.map(d => d.name),
-                datasets: [
-                  {
-                    data: portData.map(d => d.value),
-                    backgroundColor: PIE_COLORS,
-                    borderColor: 'transparent',
-                    hoverBackgroundColor: PIE_COLORS.map(c => `${c}CC`),
-                  },
-                ],
-              }}
-              options={doughnutOpts}
-            />
-          ) : (
-            <p className="text-gray-400 text-center">No port data</p>
-          )}
+          <div className="progress-circle-wrapper" style={{
+              '--progress': scanCoveragePercentage // Pass the dynamic progress to CSS variable
+          }}>
+            <div className="outer-dark-base-circle">
+              {/* This is the 3px gradient progress arc */}
+              <div className="progress-gradient-arc"></div>
+
+              {/* Dotted Inner Rings - each a separate div */}
+              <div className="inner-dotted-ring dotted-ring-1"></div>
+              <div className="inner-dotted-ring dotted-ring-2"></div>
+              <div className="inner-dotted-ring dotted-ring-3"></div>
+              <div className="inner-dotted-ring dotted-ring-4"></div>
+              <div className="inner-dotted-ring dotted-ring-5"></div>
+              <div className="inner-dotted-ring dotted-ring-6"></div>
+              <div className="inner-dotted-ring dotted-ring-7"></div>
+              <div className="inner-dotted-ring dotted-ring-8"></div>
+              <div className="inner-dotted-ring dotted-ring-9"></div>
+              <div className="inner-dotted-ring dotted-ring-10"></div>
+
+              <div className="central-display-circle">
+                <span className="percentage">{scanCoveragePercentage}%</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* 4.4.2  HTTP status distribution */}
+        {/* HTTP status distribution */}
         <div className="h-[240px]">
           <h3 className="text-lg font-medium text-teal-300 mb-3 text-center">
             HTTP Status Codes

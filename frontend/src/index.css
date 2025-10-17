@@ -81,3 +81,128 @@ div#toolcard-virustotal > svg {
   color: #fff;
   font-size: 22px;
 }
+
+/* ----------  vulnd  (from smap)  ----------------------- */
+#toolcard-vulns {
+  background-color: #820f0f;
+  color: #fff;
+  font-size: 22px;
+}
+
+.test-container {
+  width: 200px; /* Overall size of the component */
+  height: 200px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ----------  Fancy Stat Circle  ----------------------- */
+.progress-circle-wrapper {
+  position: absolute; 
+  z-index: 1;    
+  margin-top: 60px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+  1. OUTER DARK BASE CIRCLE
+  This element forms the dark background of the entire visual.
+  It takes the full size of its wrapper, which is 250px.
+*/
+.outer-dark-base-circle {
+  position: relative;
+  width: 219px;
+  height: 219px;
+  border-radius: 50%;
+  background-color: #1a1a2e; 
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); 
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  z-index: 1; 
+}
+
+/*
+  2. PROGRESS GRADIENT ARC (the outer 3px thick ring)
+  Explicitly set to 250px.
+*/
+.progress-gradient-arc {
+  position: absolute; 
+  width: 310px; 
+  height: 310px; 
+  border-radius: 50%;
+  
+  
+  background: conic-gradient(
+    #00ffff 0%,    
+    #38BDF8 30%,   
+    #5117ffff 60%, 
+    #00ffff 100%   
+  );
+  transform: rotate(-90deg); 
+
+  
+  mask: radial-gradient(transparent calc(50% - 10px), black calc(50% - 3px), black 50%, transparent 50%);
+  -webkit-mask: radial-gradient(transparent calc(50% - 10px), black calc(50% - 3px), black 50%, transparent 50%);
+
+  z-index: 3; 
+}
+
+/*
+  3. INNER DOTTED RINGS
+  Each of these is a separate HTML div, using `border: 1px dotted #fff`.
+  Opacity is now reversed for an outward fade.
+*/
+.inner-dotted-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px dotted #fff; 
+  background-color: transparent; 
+  z-index: 2; 
+}
+
+.dotted-ring-1 { width: 224px; height: 224px; opacity: 1.0;} 
+.dotted-ring-2 { width: 211px; height: 211px; opacity: 0.9;}
+.dotted-ring-3 { width: 198px; height: 198px; opacity: 0.8;}
+.dotted-ring-4 { width: 185px; height: 185px; opacity: 0.7;}
+.dotted-ring-5 { width: 172px; height: 172px; opacity: 0.6;}
+.dotted-ring-6 { width: 159px; height: 159px; opacity: 0.5;}
+.dotted-ring-7 { width: 146px; height: 146px; opacity: 0.4;}
+.dotted-ring-8 { width: 133px; height: 133px; opacity: 0.3;}
+.dotted-ring-9 { width: 120px; height: 120px; opacity: 0.2;}
+.dotted-ring-10 { width: 107px; height: 107px; opacity: 0.1;} 
+
+
+/*
+  4. CENTRAL DISPLAY CIRCLE (Purple circle with percentage)
+  Now explicitly set to 96px width and height.
+*/
+.central-display-circle {
+  position: absolute;
+  width: 115px; 
+  height: 115px; 
+  border-radius: 50%;
+  background-color: #5d35b9; 
+  border: 2px solid #569dff; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  z-index: 4; 
+}
+
+.central-display-circle .percentage {
+  color: #fff;
+  font-size: 2.2em; 
+  font-weight: normal;
+}
+
+#scan-cov-title {
+  position: absolute;
+  margin-top: -205px;
+}
