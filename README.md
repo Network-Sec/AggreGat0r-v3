@@ -1,6 +1,18 @@
 # AggreGat0r-v3
 FOSS release of Chuck's favourite LONG RANGE scanner
 
+## Goal of the platform
+This is not only a tool, it's also a method of sorts. Please understand, the goal of the tool is not detail enumeration.
+
+### Goal
+Nothing -> 128.000 possible targets -> 400 real targets with footprint
+
+### Not Goals
+Nothing -> 50K possible targets -> Info on all 50k targets  
+Something -> enrich details -> have platform with fine details  
+
+It's rather easy to adjust these things, yet our intention is that of a RANGE SCANNER. Provide a place to start, a good overview, without sweat.
+
 ## You got 2 choices... maybe more, maybe not!
 - Chuck uses this tool with mongoDB
 - Chuck can install all deps by himself without help from others, or AI
